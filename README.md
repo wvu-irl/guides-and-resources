@@ -1,13 +1,35 @@
 ## IRL ROS C++ Style Guide
 
-In general, follow [ROS C++ Style Guide](http://wiki.ros.org/CppStyleGuide) and [Google's C++ Style Guide](https://google.github.io/styleguide/cppguide.html) but some minor adjustments and extras. 
+In general, follow [ROS C++ Style Guide](http://wiki.ros.org/CppStyleGuide) and [Google's C++ Style Guide](https://google.github.io/styleguide/cppguide.html) but some minor adjustments and extras.
 
 Only the main points are extracted from the [ROS C++ Style Guide](http://wiki.ros.org/CppStyleGuide). For more information on how to conform code for areas like inheritance, exceptions, enumerations, etc. please visit their style guide website.
 
 Main differences from this style guide and theirs:
   * 1.5 Functions / Methods
 
-## 1 Naming
+Table Contents:
+  * [1 Naming](#1-naming)
+    * [1.1 ROS Packages](#11-ros-packages)
+    * [1.2 ROS Topics / Services](#12-ros-topics--services)
+    * [1.3 Files](#13-files)
+    * [1.4 Class / Types](#14-classes--types)
+    * [1.5 Function / Methods](#15-function--methods)
+      * [1.5.1 Parameter Ordering](#151-parameter-ordering)
+    * [1.6 Variables](#16-variables)
+      * [1.6.1 Constants](#161-constants)
+      * [1.6.2 Member variables](#162-member-variables)
+      * [1.6.3 Global variables](#163-global-variables)
+      * [1.6.4 Pointer variables](#163-pointer-variables)
+    * [1.7 Namespaces](#17-namespaces)
+  * [2 License statements](#2-license-statements)
+  * [3 Formatting](#3-formatting)
+    * [3.1 Line Length](#31-line-length)
+    * [3.2 #ifndef gaurds](#32-ifndef-gaurds)
+  * [4 Documentation](#4-documentation)
+  * [5 Console outputs](#5-console-outputs)
+
+
+## 1. Naming
 
   * **CamelCased**: The name starts with a capital letter, and has a capital letter for each new word, with no underscores.
   * **camelCased**: Like CamelCase, but with a lower-case first letter.
@@ -81,7 +103,7 @@ Main differences from this style guide and theirs:
   dataFile();  ## Bad
   ```
 
-    ### 1.5.1 Parameter Ordering
+    ### 1.5.1 Parameter Ordering 
 
     Order is _**inputs then outputs**_. Do not add new parameters to the end of the function just because they are new, place new input parameters before the output parameters. If an input parameter value does not change, place `const` in front.
 
@@ -152,21 +174,71 @@ Main differences from this style guide and theirs:
     String *name_ptr, name, address;  ## Note: only name_ptr is a pointer
     ```
 
-  ### 4.7 Namespaces
+  ### 1.7 Namespaces
 
   Namespace names are **under_scored**.
 
-## 5. License statements
+## 2. License statements
 
-Every source and header file must contain a license and copyright statement at the beginning of the file.
-
-In the **ros-pkg** and **wg-ros-pkg** repositories, the **LICENSE** directory contains license templates, commented for inclusion in C/C++ code.
-
-See [the ROS developer's guide](http://wiki.ros.org/DevelopersGuide) for information on permissible licenses and licensing strategy.
+Every source and header file must contain a license and copyright statement at the beginning of the file. Also the manifest.xml file for each package must contain `<license>BSD</license>`
 
 <img src="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/star-icon.png" width="15" height="15"> WVU IRL uses [BSD](https://opensource.org/licenses/BSD-3-Clause) license.
 
-## 6. Formatting
+_Source/Header Example_:
+
+```C++
+/*
+ * Copyright (c) <YEAR>, WVU Interactive Robotics Laboratory
+ *                       https://web.statler.wvu.edu/~irl/
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of the Willow Garage, Inc. nor the names of its
+ *       contributors may be used to endorse or promote products derived from
+ *       this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+```
+
+_Manifest.xml Example_:
+
+```xml
+<package>
+  <description brief="BRIEF DESCRIPTION">
+     LONGER DESCRIPTION
+  </description>
+  <author>WVU Interactive Robotics Laboratory</author>
+  <author>You/you@email.com</author>
+  <author>another author/another author@email.com</author>
+  <license>BSD</license>
+  <url>http://www.ros.org/wiki/YOURPACKAGE</url> <!-- or the link to our repo -->
+  <url>https://web.statler.wvu.edu/~irl/</url>
+  <depend package="roscpp"/>
+</package>
+```
+
+See [the ROS developer's guide](http://wiki.ros.org/DevelopersGuide) for information on permissible licenses and licensing strategy.
+
+
+## 3. Formatting
 
 Your editor should handle most formating tasks. See [EditorHelp](http://wiki.ros.org/EditorHelp) for example editor configuration files.
 
@@ -278,11 +350,11 @@ Larger example:
 
 ```
 
-  ### 6.1 Line Length
+  ### 3.1 Line Length
 
   Maximum line length is 120 characters.
 
-  ## 6.2 #ifndef gaurds
+  ## 3.2 #ifndef gaurds
 
   All headers must be protected against multiple inclusion by #ifndef guards, e.g.:
 
@@ -295,7 +367,7 @@ Larger example:
 
   This guard should begin immediately after the license statement, before any code, and should end at the end of the file.
 
-## 7. Documentation
+## 4. Documentation
 
 Code must be documented. Undocumented code, however functional it may be, cannot be maintained.
 
@@ -303,7 +375,7 @@ We use [doxygen](http://www.doxygen.org/) to auto-document our code. Doxygen par
 
 All functions, methods, classes, class variables, enumerations, and constants should be documented. Even a single comment above the class, method, etc stating it's purpose will suffice.
 
-## 8. Console outputs
+## 5. Console outputs
 
 Avoid printf and friends (e.g., cout). Instead, use [rosconsole](http://wiki.ros.org/rosconsole) for all your outputting needs. It offers macros with both printf- and stream-style arguments. Just like printf, rosconsole output goes to screen. Unlike printf, rosconsole output is:
 
@@ -311,4 +383,3 @@ Avoid printf and friends (e.g., cout). Instead, use [rosconsole](http://wiki.ros
   * controlled by verbosity level and configuration file
   * published on **/rosout**, and thus viewable by anyone on the network
   * optionally logged to disk
-

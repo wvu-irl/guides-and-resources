@@ -7,7 +7,7 @@ Only the main points are extracted from the [ROS C++ Style Guide](http://wiki.ro
 Main differences from this style guide and theirs:
   * 1.5 Functions / Methods
 
-Table Contents:
+**Table Contents**:
   * [1 Naming](#1-naming)
     * [1.1 ROS Packages](#11-ros-packages)
     * [1.2 ROS Topics / Services](#12-ros-topics--services)

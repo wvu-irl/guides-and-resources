@@ -242,6 +242,7 @@ _Manifest.xml Example_:
 
 _URDF/Xacro Example_:
 ```xml
+<?xml version="1.0"?>
 <!--
   Software License Agreement (BSD)
 
